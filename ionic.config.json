@@ -1,0 +1,7 @@
+{
+  "name": "instant-mind",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
