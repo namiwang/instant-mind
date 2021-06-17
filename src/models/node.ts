@@ -1,5 +1,6 @@
 import { IAnyModelType, Instance, types } from 'mobx-state-tree'
 import * as reactFlow from 'react-flow-renderer'
+import { ArrowHeadType } from 'react-flow-renderer'
 
 type NodeData = { label: string }
 export type FlowEdge = reactFlow.Edge<null>
@@ -11,7 +12,14 @@ const Node = types
     id: types.identifierNumber,
     label: types.string,
     parent: types.maybe(types.reference(types.late((): IAnyModelType => Node))),
+    outgoing: false,
   })
+  .views(self => ({
+    get type (): 'default' | 'input' | 'output' {
+      if (!self.parent) { return 'input' }
+      return 'default'
+    }
+  }))
   .views(self => ({
     get flowData (): FlowNode {
       return {
@@ -22,8 +30,8 @@ const Node = types
         },
         data: {
           label: self.label
-        }
-        // type: 'node', // TODO native
+        },
+        type: self.type
         // className: 'node'
       }
     },
@@ -37,6 +45,7 @@ const Node = types
         source: self.parent.id.toString(),
         target: self.id.toString(),
         animated: true,
+        arrowHeadType: ArrowHeadType.Arrow,
       }
     }
   }))
