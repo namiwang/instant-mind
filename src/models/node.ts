@@ -1,6 +1,6 @@
 import { IAnyModelType, Instance, types } from 'mobx-state-tree'
 import * as reactFlow from 'react-flow-renderer'
-import { ArrowHeadType } from 'react-flow-renderer'
+import { ArrowHeadType, Position } from 'react-flow-renderer'
 
 type NodeData = { label: string }
 export type FlowEdge = reactFlow.Edge<null>
@@ -17,6 +17,7 @@ const Node = types
   .views(self => ({
     get type (): 'default' | 'input' | 'output' {
       if (!self.parent) { return 'input' }
+      if (!self.outgoing) { return 'output' }
       return 'default'
     }
   }))
@@ -31,8 +32,9 @@ const Node = types
         data: {
           label: self.label
         },
-        type: self.type
-        // className: 'node'
+        type: self.type,
+        sourcePosition: Position.Right,
+        targetPosition: Position.Left,
       }
     },
     get edgeToParent (): FlowEdge | undefined {

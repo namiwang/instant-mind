@@ -7,7 +7,12 @@ import { Graph, GraphInstance } from './graph'
 
 const md = new MarkdownIt()
 
-type NodeData = { id: number, label: string, parent?: number }
+type NodeData = {
+  id: number,
+  label: string,
+  parent?: number,
+  outgoing?: boolean
+}
 
 function graphFromDoc(tokens: Token[]): GraphInstance {
   const nodes: { [key: string]: NodeData } = {}
@@ -41,6 +46,9 @@ function graphFromDoc(tokens: Token[]): GraphInstance {
         wrapCurrentNode()
 
         const parent = last(ancestors)
+        if (parent) {
+          parent.outgoing = true
+        }
         nodesN += 1
         currentNode = {
           id: nodesN,
