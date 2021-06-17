@@ -11,19 +11,25 @@ const Home: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const focusOnEditor = () => {
-    textareaRef.current?.focus()
-    // TODO cursor pos
+    const element = textareaRef.current
+    if (!element) { return }
+    element.focus()
+    element.setSelectionRange(element.value.length, element.value.length)
   }
 
   const toggleShowEditor = () => {
     setShowEditor(!showEditor)
-    if (showEditor) {
-      focusOnEditor()
-    }
   }
 
   useEffect(() => {
-    setTimeout(focusOnEditor, 500)
+    if (showEditor) {
+      focusOnEditor()
+    }
+  }, [showEditor])
+
+  // HACK wont focus on first render
+  useEffect(() => {
+    setTimeout(focusOnEditor, 200)
   }, [])
 
   return (
