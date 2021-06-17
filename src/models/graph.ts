@@ -1,7 +1,8 @@
 import { Instance, types } from 'mobx-state-tree'
-import Node, { FlowElement } from './node'
-import dagre from 'dagre'
 import { isEdge, isNode } from 'react-flow-renderer'
+import dagre from 'dagre'
+
+import Node, { FlowElement } from './node'
 
 // TODO
 const NODE_W = 200
@@ -23,34 +24,31 @@ export const Graph = types
         }
       })
 
-      console.log('elements', elements)
       return elements
     },
   }))
   .views(self => ({
     get layoutedElements (): FlowElement[] {
-      const dagreGraph = new dagre.graphlib.Graph()
-      // dagreGraph.setDefaultEdgeLabel(() => ({}))
-      dagreGraph.setGraph({ rankdir: 'LR' })
+      const g = new dagre.graphlib.Graph()
+      g.setGraph({ rankdir: 'LR' })
+      g.setDefaultEdgeLabel(() => ({}))
 
       const elements = self.flowElements
 
-      console.warn(elements)
-
       elements.forEach((element) => {
         if (isNode(element)) {
-          dagreGraph.setNode(element.id, { width: NODE_W, height: NODE_H })
+          g.setNode(element.id, { width: NODE_W, height: NODE_H })
         } else {
-          dagreGraph.setEdge(element.source, element.target)
+          g.setEdge(element.source, element.target)
         }
       })
 
-      dagre.layout(dagreGraph)
+      dagre.layout(g)
 
       elements.forEach((element) => {
         if (isEdge(element)) { return }
 
-        const nodeWithPosition = dagreGraph.node(element.id)
+        const nodeWithPosition = g.node(element.id)
 
         element.position = {
           x: nodeWithPosition.x - NODE_W / 2 + Math.random() / 1000, // rerender HACK
