@@ -9,7 +9,7 @@ const Mind = observer(() => {
     <ReactFlow
       id="mind"
       // nodeTypes={{ node: Node }}
-      elements={root.graph.flowElements}
+      elements={root.graph.layoutedElements}
       // elementsSelectable={false}
       // nodesDraggable={false}
       // nodesConnectable={false}

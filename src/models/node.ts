@@ -26,8 +26,8 @@ const Node = types
       return {
         id: `${self.id}`,
         position: {
-          x: Math.random() * 1000,
-          y: Math.random() * 1000,
+          x: 0,
+          y: 0
         },
         data: {
           label: self.label
