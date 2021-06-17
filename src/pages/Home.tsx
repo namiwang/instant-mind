@@ -1,13 +1,14 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import Editor from '../components/Editor';
+import Mind from '../components/Mind';
+import './Home.sass';
 
 const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonTitle>InstantMind</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -16,7 +17,9 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
+
+        <Editor />
+        <Mind />
       </IonContent>
     </IonPage>
   );
