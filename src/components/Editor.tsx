@@ -1,5 +1,5 @@
 import { last } from "lodash"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { INIT_RAW, useRoot } from "../models/root"
 
 const LIST_ITEM_PREFIX_PATTERN = /^( *- )/
@@ -8,15 +8,25 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
   const root = useRoot()
 
   const [editorRaw, updateEditorRaw] = useState(INIT_RAW)
+  const selectionStartToSync = useRef(0)
 
   function updateRaw (raw: string) {
-    updateEditorRaw(raw)
     root.updateRaw(raw)
+    updateEditorRaw(raw)
+
+    // HACK to preserve cursor position
+    window.requestAnimationFrame(() => {
+      const toSync = selectionStartToSync.current
+      if (!toSync) { return }
+      const element = textareaRef.current?.setSelectionRange(toSync, toSync)
+    })
   }
 
   function handleInput (event: React.ChangeEvent<HTMLTextAreaElement>): void {
+    const target = event.target as HTMLTextAreaElement
     const prev = root.raw
-    let current = event.target.value
+    let current = target.value
+    let selectionStart = target.selectionStart
 
     if (prev + "\n" === current) {
       const lines = prev.split("\n")
@@ -26,9 +36,12 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
         if (match) {
           const prefix = match[0]
           current += prefix
+          selectionStart += prefix.length
         }
       }
     }
+
+    selectionStartToSync.current = selectionStart
 
     updateRaw(current)
   }
@@ -40,8 +53,9 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
 
     const target = event.target as HTMLTextAreaElement
     const value = target.value
+    let selectionStart = target.selectionStart
 
-    const textUntilCursor = value.substr(0, target.selectionStart)
+    const textUntilCursor = value.substr(0, selectionStart)
     if (textUntilCursor.length === 0) {
       return
     }
@@ -56,10 +70,12 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
     if (!event.shiftKey) {
       // prefix indent
       newLastLine = '  ' + lastLine
+      selectionStartToSync.current = selectionStart + 2
     } else {
       // remove prefix indent
       if (newLastLine.startsWith('  ')) {
         newLastLine = newLastLine.substr(2)
+        selectionStartToSync.current = selectionStart - 2
       }
     }
 
@@ -68,7 +84,8 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
     const newTextUntilCursor = lines.join("\n")
     const newValue =
       newTextUntilCursor + 
-      value.slice(target.selectionStart)
+      value.slice(selectionStart)
+
     updateRaw(newValue)
   }
 
@@ -77,7 +94,8 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
       id="editor"
       ref={textareaRef}
       value={editorRaw}
-      onInput={handleInput.bind(this)} onKeyDown={handleKeyDown}
+      onInput={handleInput.bind(this)}
+      onKeyDown={handleKeyDown}
     />
   )
 }
