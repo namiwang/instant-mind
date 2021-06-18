@@ -46,7 +46,7 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonFab vertical="top" horizontal="start" slot="fixed" >
+        <IonFab vertical="bottom" horizontal="start" slot="fixed" >
           <IonFabButton onClick={toggleShowEditor}>
             <IonIcon icon={pencilOutline} />
           </IonFabButton>
