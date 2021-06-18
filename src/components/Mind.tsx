@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import ReactFlow, { Background, BackgroundVariant } from 'react-flow-renderer'
+import ReactFlow, { Background, BackgroundVariant, MiniMap } from 'react-flow-renderer'
 import { useRoot } from "../models/root"
 
 const Mind = observer(() => {
@@ -22,6 +22,7 @@ const Mind = observer(() => {
       // onElementClick={onElementClick}
     >
       <Background variant={BackgroundVariant.Lines} />
+      <MiniMap />
     </ReactFlow>
   )
 })

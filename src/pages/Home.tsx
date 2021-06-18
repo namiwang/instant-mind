@@ -1,5 +1,5 @@
-import { IonCol, IonContent, IonFab, IonFabButton, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react'
-import { pencilOutline, text } from 'ionicons/icons'
+import { IonButton, IonButtons, IonCol, IonContent, IonFab, IonFabButton, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react'
+import { downloadOutline, pencilOutline } from 'ionicons/icons'
 import { useEffect, useRef, useState } from 'react'
 import Editor from '../components/Editor'
 import Mind from '../components/Mind'
@@ -37,6 +37,11 @@ const Home: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>InstantMind</IonTitle>
+          <IonButtons slot="primary">
+            <IonButton>
+              <IonIcon slot="icon-only" icon={downloadOutline} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
