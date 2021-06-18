@@ -2,9 +2,15 @@
   position: fixed
   left: 64px
   bottom: 64px
-  width: calc(100vw / 2 - 64px)
-  height: calc(100vh / 2 - 64px)
+  width: calc(100vw / 2 - 72px)
+  height: calc(100vh / 2 - 72px)
   z-index: 1
+
+@media (max-width: 768px)
+  #editor
+    left: 8px
+    right: 8px
+    width: calc(100vw - 16px)
 
 #mind
   position: fixed
