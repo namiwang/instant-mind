@@ -7,6 +7,8 @@ import { Graph, GraphInstance } from './graph'
 
 const md = new MarkdownIt()
 
+export const INIT_RAW = '- mind'
+
 type NodeData = {
   id: number,
   label: string,
@@ -104,6 +106,7 @@ export type RootStoreInstance = Instance<typeof RootStore>
 export const rootStore = RootStore.create({
   graph: {}
 })
+rootStore.updateRaw(INIT_RAW)
 
 export const RootStoreContext = createContext<null | RootStoreInstance>(null)
 
