@@ -51,6 +51,8 @@ const Editor = () => {
   function handleKeyDown (event: React.KeyboardEvent<HTMLTextAreaElement>): void {
     if (event.key !== 'Tab') { return }
 
+    console.log('editor:tab')
+
     event.preventDefault()
 
     const target = event.target as HTMLTextAreaElement
@@ -67,6 +69,7 @@ const Editor = () => {
     if (!lastLine.match(LIST_ITEM_PREFIX_PATTERN)) {
       return
     }
+    console.log('lastLine', lastLine)
 
     let newLastLine = lastLine
     if (!event.shiftKey) {

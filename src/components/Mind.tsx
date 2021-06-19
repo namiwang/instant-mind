@@ -18,13 +18,13 @@ const Mind = observer(() => {
 
   useEffect(() => {
     flowInstance?.fitView()
-  }, [root.graph.layoutedElements])
+  }, [root.graph.elements])
 
   return (
     <ReactFlow
       id="mind"
       // nodeTypes={{ node: Node }}
-      elements={root.graph.layoutedElements}
+      elements={root.graph.elements}
       onLoad={onLoad}
       // elementsSelectable={false}
       // nodesDraggable={false}

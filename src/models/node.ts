@@ -13,6 +13,9 @@ const Node = types
     label: types.string,
     parent: types.maybe(types.reference(types.late((): IAnyModelType => Node))),
     outgoing: false,
+    rank: types.number,
+    posX: 0,
+    posY: 0,
   })
   .views(self => ({
     get type (): 'default' | 'input' | 'output' {
@@ -26,11 +29,11 @@ const Node = types
       return {
         id: `${self.id}`,
         position: {
-          x: 0,
-          y: 0
+          x: self.posX,
+          y: self.posY,
         },
         data: {
-          label: self.label
+          label: self.rank.toString() + self.label
         },
         type: self.type,
         sourcePosition: Position.Right,
