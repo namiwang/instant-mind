@@ -70,8 +70,8 @@ function layoutHalfNodes (nodes: NodesData, direction: 'LR' | 'RL'): void {
   halfNodes.forEach(node => {
     const nodeWithPos = g.node(node.id.toString())
 
-    node.posX = nodeWithPos.x - NODE_W / 2 // + random(0 - DISTURBANCE, DISTURBANCE)
-    node.posY = nodeWithPos.y - NODE_H / 2 // + random(0 - DISTURBANCE, DISTURBANCE)
+    node.posX = nodeWithPos.x - NODE_W / 2 + random(0 - DISTURBANCE, DISTURBANCE)
+    node.posY = nodeWithPos.y - NODE_H / 2 + random(0 - DISTURBANCE, DISTURBANCE)
   })
 }
 
@@ -159,12 +159,14 @@ export function graphFromDoc (tokens: Token[]): GraphInstance {
   wrapCurrentNode()
 
   layoutHalfNodes(nodes, 'LR')
+  const deltaY = nodes[0].posY
   layoutHalfNodes(nodes, 'RL')
   const deltaX = nodes[0].posX
 
   Object.values(nodes).forEach(node => {
     if (node.rank > 0) {
       (node.posX as number) += deltaX as number
+      (node.posY as number) -= deltaY as number
     }
   })
 

@@ -33,7 +33,7 @@ const Node = types
           y: self.posY,
         },
         data: {
-          label: self.rank.toString() + self.label
+          label: self.label
         },
         type: self.type,
         sourcePosition: Position.Right,
