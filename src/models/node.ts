@@ -35,6 +35,7 @@ const Node = types
         type: self.type,
         sourcePosition: Position.Right,
         targetPosition: Position.Left,
+        className: 'node'
       }
     },
     get edgeToParent (): FlowEdge | undefined {
@@ -46,8 +47,8 @@ const Node = types
         id: `${self.id}-${self.parent.id}`,
         source: self.parent.id.toString(),
         target: self.id.toString(),
-        animated: true,
-        arrowHeadType: ArrowHeadType.Arrow,
+        // animated: false,
+        // arrowHeadType: ArrowHeadType.Arrow,
       }
     }
   }))

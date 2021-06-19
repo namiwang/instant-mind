@@ -4,6 +4,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import { rootStore, RootStoreContext } from './models/root';
 import Home from './pages/Home';
 
+import 'animate.css/animate.min.css'
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 

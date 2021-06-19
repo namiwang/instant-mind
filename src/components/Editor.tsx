@@ -4,11 +4,13 @@ import { INIT_RAW, useRoot } from "../models/root"
 
 const LIST_ITEM_PREFIX_PATTERN = /^( *- )/
 
-const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement>}) => {
+const Editor = () => {
   const root = useRoot()
 
+  const textarea = useRef<HTMLTextAreaElement>(null)
   const [editorRaw, updateEditorRaw] = useState(INIT_RAW)
   const selectionStartToSync = useRef(0)
+  const [idle, updateIdle] = useState(true)
 
   function updateRaw (raw: string) {
     root.updateRaw(raw)
@@ -18,7 +20,7 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
     window.requestAnimationFrame(() => {
       const toSync = selectionStartToSync.current
       if (!toSync) { return }
-      const element = textareaRef.current?.setSelectionRange(toSync, toSync)
+      textarea.current?.setSelectionRange(toSync, toSync)
     })
   }
 
@@ -92,10 +94,11 @@ const Editor = ({textareaRef}: {textareaRef: React.RefObject<HTMLTextAreaElement
   return (
     <textarea
       id="editor"
-      ref={textareaRef}
+      ref={textarea}
       value={editorRaw}
       onInput={handleInput.bind(this)}
       onKeyDown={handleKeyDown}
+      className={idle ? 'idle' : ''}
     />
   )
 }
