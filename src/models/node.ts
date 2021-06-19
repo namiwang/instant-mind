@@ -13,7 +13,7 @@ const Node = types
     label: types.string,
     parent: types.maybe(types.reference(types.late((): IAnyModelType => Node))),
     outgoing: false,
-    rank: types.number,
+    side: types.number, // 0, -1, 1
     posX: 0,
     posY: 0,
   })

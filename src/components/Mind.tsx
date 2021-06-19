@@ -12,8 +12,6 @@ const Mind = observer(() => {
 
   const onLoad = useCallback((instance) => {
     setFlowInstance(instance)
-    // instance.fitView()
-    // instance.zoomTo(FLOW_ZOOM_DEFAULT)
   }, [])
 
   useEffect(() => {
@@ -26,9 +24,9 @@ const Mind = observer(() => {
       // nodeTypes={{ node: Node }}
       elements={root.graph.elements}
       onLoad={onLoad}
-      // elementsSelectable={false}
+      elementsSelectable={false}
       // nodesDraggable={false}
-      // nodesConnectable={false}
+      nodesConnectable={false}
       // TODO The React Flow parent container needs a width and a height to render the graph.
       // style={{ width: `${windowSize.innerWidth}px`, height: `${windowSize.innerHeight}px` }}
       // minZoom={FLOW_ZOOM_MIN}
