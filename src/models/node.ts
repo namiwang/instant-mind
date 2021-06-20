@@ -1,6 +1,7 @@
 import { IAnyModelType, Instance, types } from 'mobx-state-tree'
 import * as reactFlow from 'react-flow-renderer'
 import { ArrowHeadType, Position } from 'react-flow-renderer'
+import clsx from 'clsx'
 
 type NodeData = { label: string }
 export type FlowEdge = reactFlow.Edge<null>
@@ -18,14 +19,24 @@ const Node = types
     posY: 0,
   })
   .views(self => ({
-    get type (): 'default' | 'input' | 'output' {
-      if (!self.parent) { return 'input' }
+    get type (): 'default' | 'center' | 'output' {
+      if (!self.parent) { return 'center' }
       if (!self.outgoing) { return 'output' }
       return 'default'
-    }
+    },
+  }))
+  .views(self => ({
+    get klass (): string {
+      return clsx('node', {
+        center: !self.parent,
+      })
+    },
   }))
   .views(self => ({
     get flowData (): FlowNode {
+      const sourcePosition = !self.parent ? undefined : self.side > 0 ? Position.Right : Position.Left
+      const targetPosition = !self.parent ? undefined : self.side > 0 ? Position.Left : Position.Right
+
       return {
         id: `${self.id}`,
         position: {
@@ -36,9 +47,9 @@ const Node = types
           label: self.label
         },
         type: self.type,
-        sourcePosition: Position.Right,
-        targetPosition: Position.Left,
-        className: 'node'
+        sourcePosition,
+        targetPosition,
+        className: self.klass,
       }
     },
     get edgeToParent (): FlowEdge | undefined {
@@ -46,12 +57,17 @@ const Node = types
         return undefined
       }
 
+      const sourceHandle = !self.parent ? undefined : (
+        self.side > 0 ? 'right' : 'left'
+      )
+
       return {
         id: `${self.id}-${self.parent.id}`,
         source: self.parent.id.toString(),
         target: self.id.toString(),
         // animated: false,
         // arrowHeadType: ArrowHeadType.Arrow,
+        sourceHandle,
       }
     }
   }))

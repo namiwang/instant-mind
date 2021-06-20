@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { useCallback, useEffect, useState } from 'react'
 import ReactFlow, { Background, BackgroundVariant, MiniMap } from 'react-flow-renderer'
 import { useRoot } from "../models/root"
+import CenterNode from './CenterNode'
 
 const FLOW_ZOOM_DEFAULT = 0.8
 
@@ -21,7 +22,7 @@ const Mind = observer(() => {
   return (
     <ReactFlow
       id="mind"
-      // nodeTypes={{ node: Node }}
+      nodeTypes={{ center: CenterNode }}
       elements={root.graph.elements}
       onLoad={onLoad}
       elementsSelectable={false}
