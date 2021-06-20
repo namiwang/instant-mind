@@ -36,6 +36,21 @@
     animation: fadeIn
     animation-duration: .5s
 
+    border-radius: 0
+    border:
+      top: none
+      left: none
+      right: none
+    border-color: #b1b1b7
+
+    > .react-flow__handle
+      pointer-events: none
+      visibility: hidden
+      top: 100%
+
+      // &.react-flow__handle-left
+      //   left: -8px
+
     &.center
       padding: 10px
       border-radius: 3px
@@ -45,3 +60,6 @@
       text-align: center
       border-width: 1px
       border-style: solid
+
+      > .react-flow__handle
+        top: 50%

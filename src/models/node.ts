@@ -19,9 +19,9 @@ const Node = types
     posY: 0,
   })
   .views(self => ({
-    get type (): 'default' | 'center' | 'output' {
+    get type (): 'default' | 'center' {
       if (!self.parent) { return 'center' }
-      if (!self.outgoing) { return 'output' }
+      // if (!self.outgoing) { return 'output' }
       return 'default'
     },
   }))
