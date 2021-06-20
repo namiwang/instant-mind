@@ -15,7 +15,7 @@ const Mind = observer(() => {
     setFlowInstance(instance)
     setTimeout(() => {
       instance.fitView()
-    }, 200)
+    }, 500)
   }, [])
 
   useEffect(() => {
