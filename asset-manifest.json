@@ -2,9 +2,9 @@
   "files": {
     "static/js/0.7f2a9f89.chunk.js": "/instant-mind/static/js/0.7f2a9f89.chunk.js",
     "static/js/0.7f2a9f89.chunk.js.map": "/instant-mind/static/js/0.7f2a9f89.chunk.js.map",
-    "main.css": "/instant-mind/static/css/main.1a035dc0.chunk.css",
-    "main.js": "/instant-mind/static/js/main.bbb866e0.chunk.js",
-    "main.js.map": "/instant-mind/static/js/main.bbb866e0.chunk.js.map",
+    "main.css": "/instant-mind/static/css/main.3dc97b13.chunk.css",
+    "main.js": "/instant-mind/static/js/main.eb727070.chunk.js",
+    "main.js.map": "/instant-mind/static/js/main.eb727070.chunk.js.map",
     "polyfills-dom.js": "/instant-mind/static/js/polyfills-dom.f928e9ec.chunk.js",
     "polyfills-dom.js.map": "/instant-mind/static/js/polyfills-dom.f928e9ec.chunk.js.map",
     "runtime-main.js": "/instant-mind/static/js/runtime-main.4bae1bc4.js",
@@ -124,7 +124,7 @@
     "service-worker.js": "/instant-mind/service-worker.js",
     "service-worker.js.map": "/instant-mind/service-worker.js.map",
     "static/css/4.f0fa30b1.chunk.css.map": "/instant-mind/static/css/4.f0fa30b1.chunk.css.map",
-    "static/css/main.1a035dc0.chunk.css.map": "/instant-mind/static/css/main.1a035dc0.chunk.css.map",
+    "static/css/main.3dc97b13.chunk.css.map": "/instant-mind/static/css/main.3dc97b13.chunk.css.map",
     "static/js/4.b2f7356a.chunk.js.LICENSE.txt": "/instant-mind/static/js/4.b2f7356a.chunk.js.LICENSE.txt",
     "static/js/52.a61fd453.chunk.js.LICENSE.txt": "/instant-mind/static/js/52.a61fd453.chunk.js.LICENSE.txt",
     "static/js/polyfills-dom.f928e9ec.chunk.js.LICENSE.txt": "/instant-mind/static/js/polyfills-dom.f928e9ec.chunk.js.LICENSE.txt"
@@ -133,7 +133,7 @@
     "static/js/runtime-main.4bae1bc4.js",
     "static/css/4.f0fa30b1.chunk.css",
     "static/js/4.b2f7356a.chunk.js",
-    "static/css/main.1a035dc0.chunk.css",
-    "static/js/main.bbb866e0.chunk.js"
+    "static/css/main.3dc97b13.chunk.css",
+    "static/js/main.eb727070.chunk.js"
   ]
 }
