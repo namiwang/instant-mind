@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback, useEffect, useState } from 'react'
-import ReactFlow, { Background, BackgroundVariant, MiniMap } from 'react-flow-renderer'
+import ReactFlow, { Background, BackgroundVariant, MiniMap, OnLoadParams } from 'react-flow-renderer'
 import { useRoot } from "../models/root"
 import CenterNode from './CenterNode'
 
@@ -11,8 +11,11 @@ const Mind = observer(() => {
 
   const [flowInstance, setFlowInstance] = useState<any>(null)
 
-  const onLoad = useCallback((instance) => {
+  const onLoad = useCallback((instance: OnLoadParams) => {
     setFlowInstance(instance)
+    setTimeout(() => {
+      instance.fitView()
+    }, 200)
   }, [])
 
   useEffect(() => {
