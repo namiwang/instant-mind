@@ -28,7 +28,7 @@ import './theme/variables.css';
 const App: React.FC = () => (
   <RootStoreContext.Provider value={rootStore}>
     <IonApp>
-      <IonReactRouter>
+      {/* <IonReactRouter>
         <IonRouterOutlet>
           <Route exact path="/home">
             <Home />
@@ -37,7 +37,8 @@ const App: React.FC = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
-      </IonReactRouter>
+      </IonReactRouter> */}
+      <Home />
     </IonApp>
   </RootStoreContext.Provider>
 );
